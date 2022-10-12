@@ -17,11 +17,6 @@ func NewUserControllerImpl(userService service.UserService) UserController {
 	return &UserControllerImpl{UserService: userService}
 }
 
-func (controller *UserControllerImpl) Route(app *fiber.App) {
-	app.Get("/api/users", controller.FindAll)
-	app.Post("/api/users", controller.Insert)
-}
-
 func (controller *UserControllerImpl) Insert(c *fiber.Ctx) error {
 	var request model.CreateUserRequest
 	err := c.BodyParser(&request)
