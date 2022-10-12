@@ -4,8 +4,7 @@ import (
 	"mangojek-backend/entity"
 	"mangojek-backend/model"
 	"mangojek-backend/repository"
-
-	validation "github.com/go-ozzo/ozzo-validation"
+	"mangojek-backend/validation"
 )
 
 type UserServiceImpl struct {
@@ -39,8 +38,6 @@ func (service *UserServiceImpl) Insert(request model.CreateUserRequest) (respons
 		Password: request.Password,
 	}
 
-	// fmt.Println("service: ", user)
-
 	service.UserRepository.Insert(request)
 	response = model.CreateUserResponse{
 		Id:       user.Id,
@@ -48,6 +45,5 @@ func (service *UserServiceImpl) Insert(request model.CreateUserRequest) (respons
 		Email:    user.Email,
 		Password: user.Password,
 	}
-	// fmt.Println(response)
 	return response
 }
