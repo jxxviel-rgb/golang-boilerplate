@@ -2,7 +2,6 @@ package repository
 
 import (
 	"errors"
-	"fmt"
 	"mangojek-backend/config"
 	"mangojek-backend/entity"
 	"mangojek-backend/exception"
@@ -38,8 +37,6 @@ func (repository *UserRepositoryImpl) FindAll() ([]entity.User, error) {
 			Password: item.Password,
 		})
 	}
-	fmt.Println("users: ", users)
-	fmt.Println("items: ", items)
 	return users, nil
 }
 
@@ -52,7 +49,6 @@ func (repository *UserRepositoryImpl) Delete(db *gorm.DB, userId int) {
 func (repository *UserRepositoryImpl) Insert(request model.CreateUserRequest) (user entity.User) {
 	ctx, cancel := config.NewPostgresContext()
 	defer cancel()
-	// fmt.Println("repository: ", user)
 	result := repository.DB.WithContext(ctx).Create(&entity.User{
 		Id:       request.Id,
 		Name:     request.Name,
